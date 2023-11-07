@@ -13,17 +13,14 @@ const todo_schema = z.object({
 
 type todo_schema = z.infer<typeof todo_schema>;
 
-export async function createTodo(prevState, queryData) {
+export async function createTodo(x, y) {
+  console.log("formData", x, y);
   let data = {
-    title: queryData.get("title"),
-    description: queryData.get("description"),
-    category_id: Number(queryData.get("category_id")),
-    due_date:
-      queryData.get("due_date") !== "" ? queryData.get("due_date") : new Date(),
-    is_completed:
-      queryData.get("is_completed") !== ""
-        ? queryData.get("is_completed")
-        : false,
+    title: y.get("title"),
+    description: y.get("description"),
+    category_id: Number(y.get("category_id")),
+    due_date: y.get("due_date") !== "" ? y.get("due_date") : new Date(),
+    is_completed: y.get("is_completed") !== "" ? y.get("is_completed") : false,
   };
 
   const validatedData = todo_schema.parse(data);

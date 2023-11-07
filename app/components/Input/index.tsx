@@ -2,7 +2,7 @@
 import React from "react";
 import { ColorButton } from "..";
 import { useFormState } from "react-dom";
-import { createTodo } from "@/app/api/createTodo/route";
+import { createTodo } from "@/app/actions/createTodo";
 
 const dummyMenuItems = [
   {
@@ -31,7 +31,13 @@ const dummyMenuItems = [
 // });
 
 export const Input = () => {
-  const [message, formAction] = useFormState(createTodo, null);
+  const [message, formAction] = useFormState(createTodo, {
+    title: "",
+    description: "",
+    category_id: 0,
+    due_date: "",
+    is_completed: false,
+  });
 
   return (
     <>
